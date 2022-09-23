@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose')
 const url = 'mongodb://localhost/dbcontacto'
 
 mongoose.connect(url,{
@@ -12,5 +12,5 @@ db.on('error',console.error.bind(console,'Error al conectar MongoDb'))
 db.once('open',function callback(){
     console.log("conectado a mongo")
 })
-export default db;
+module.exports = db
 

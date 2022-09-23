@@ -1,8 +1,8 @@
-import { Model } from "mongoose";
-import model from "../model/Contacto.js";
+const Contacto=require('../model/Contacto')
 
-export const mostrar = (req,res) =>{
-    model.find({},(error,contactos)=>{
+
+module.exports.mostrar = (req,res) =>{
+    Contacto.find({},(error,contactos)=>{
         if(error){
             return res.status(500).json({
                 message:"Error mostrando conctactos"
@@ -12,8 +12,8 @@ export const mostrar = (req,res) =>{
     })
 }
 
-export const crear = (req,res) =>{
-    const contacto = new model({
+module.exports.crear = (req,res) =>{
+    const contacto = new Contacto({
         nombre:req.body.nombre,
         celular:req.body.celular
     })
@@ -27,11 +27,11 @@ export const crear = (req,res) =>{
     })
 }
 
-export const editar = (req,res) =>{
+module.exports.editar = (req,res) =>{
    const id = req.body.id_editar
    const nombre = req.body.nombre_editar
    const celular = req.body.celular_editar
-   model.findByIdAndUpdate(id,{nombre,celular},(error,contacto)=>{
+   Contacto.findByIdAndUpdate(id,{nombre,celular},(error,contacto)=>{
     if(error){
         return res.status(500).json({
             message:'Error actualizando a contacto'
@@ -41,9 +41,9 @@ export const editar = (req,res) =>{
    })
 }
 
-export const borrar = (req,res) =>{
+module.exports.borrar = (req,res) =>{
     const id = req.params.id
-    model.findByIdAndRemove(id,(error,contacto)=>{
+    Contacto.findByIdAndRemove(id,(error,contacto)=>{
         if(error){
             return res.status(500).json({
                 message:'Error al eliminar contacto'
